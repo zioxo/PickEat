@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html lang="es" class="h-full bg-black">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>Menú Criollo 3D - App Móvil</title>
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>PickEat - App Móvil</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Font Awesome Icons -->
@@ -11,7 +13,9 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@600;800&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@600;800&display=swap"
+        rel="stylesheet">
 
     <style>
         :root {
@@ -99,9 +103,11 @@
         .bottom-sheet {
             transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         }
+
         .bottom-sheet-hidden {
             transform: translateY(100%);
         }
+
         .bottom-sheet-visible {
             transform: translateY(0%);
         }
@@ -110,6 +116,7 @@
         .nav-btn.active {
             color: #fb7185;
         }
+
         .nav-btn.active .nav-icon-bg {
             background-color: rgba(225, 29, 72, 0.25);
             border-color: rgba(225, 29, 72, 0.5);
@@ -119,42 +126,59 @@
         .no-scrollbar::-webkit-scrollbar {
             display: none;
         }
+
         .no-scrollbar {
             -ms-overflow-style: none;
             scrollbar-width: none;
         }
 
         @keyframes pulseGlow {
-            0%, 100% { opacity: 0.6; transform: scale(1); }
-            50% { opacity: 0.9; transform: scale(1.05); }
+
+            0%,
+            100% {
+                opacity: 0.6;
+                transform: scale(1);
+            }
+
+            50% {
+                opacity: 0.9;
+                transform: scale(1.05);
+            }
         }
+
         .animate-pulse-glow {
             animation: pulseGlow 3s infinite ease-in-out;
         }
     </style>
 </head>
-<body class="h-full w-full flex justify-center items-center bg-[#050203] text-slate-100 selection:bg-rose-600 selection:text-white">
+
+<body
+    class="h-full w-full flex justify-center items-center bg-[#050203] text-slate-100 selection:bg-rose-600 selection:text-white">
 
     <!-- Marco Contenedor Tipo Aplicativo Móvil -->
-    <div class="w-full h-full sm:max-w-[430px] sm:h-[93vh] sm:rounded-[44px] sm:border-[8px] sm:border-rose-950/60 bg-[#070305] flex flex-col justify-between relative overflow-hidden shadow-2xl shadow-rose-950/40">
+    <div
+        class="w-full h-full sm:max-w-[430px] sm:h-[93vh] sm:rounded-[44px] sm:border-[8px] sm:border-rose-950/60 bg-[#070305] flex flex-col justify-between relative overflow-hidden shadow-2xl shadow-rose-950/40">
 
         <!-- Encabezado / Top Bar Móvil -->
-        <header class="w-full pt-4 pb-3 px-5 glass-panel border-b border-rose-900/30 flex items-center justify-between z-30 shrink-0">
+        <header
+            class="w-full pt-4 pb-3 px-5 glass-panel border-b border-rose-900/30 flex items-center justify-between z-30 shrink-0">
             <div class="flex items-center gap-3">
-                <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-rose-700 via-rose-500 to-rose-400 flex items-center justify-center shadow-md shadow-rose-900/60 border border-rose-300/30">
+                <div
+                    class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-rose-700 via-rose-500 to-rose-400 flex items-center justify-center shadow-md shadow-rose-900/60 border border-rose-300/30">
                     <i class="fa-solid fa-utensils text-white text-lg"></i>
                 </div>
                 <div>
                     <h1 class="text-base font-extrabold tracking-tight text-white flex items-center gap-1.5">
-                        Menú Criollo
-                        <span class="text-[10px] px-2 py-0.5 rounded-full bg-rose-900/60 text-rose-300 font-mono-custom border border-rose-700/40">Lima 3D</span>
+                        PickEat
                     </h1>
                     <p class="text-[11px] text-rose-300/70 font-medium">¿Qué cocinamos hoy?</p>
                 </div>
             </div>
 
             <!-- Botón de Audio y Sonido -->
-            <button id="btn-toggle-audio" class="w-9 h-9 rounded-2xl bg-rose-950/70 border border-rose-800/50 flex items-center justify-center text-rose-300 active:scale-95 transition" title="Activar/Silenciar sonido">
+            <button id="btn-toggle-audio"
+                class="w-9 h-9 rounded-2xl bg-rose-950/70 border border-rose-800/50 flex items-center justify-center text-rose-300 active:scale-95 transition"
+                title="Activar/Silenciar sonido">
                 <i id="audio-icon" class="fa-solid fa-volume-high text-rose-400 text-sm"></i>
             </button>
         </header>
@@ -163,29 +187,37 @@
         <main class="flex-1 relative w-full h-full overflow-hidden flex flex-col">
 
             <!-- Luces Neón de Fondo -->
-            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[320px] h-[320px] bg-rose-900/25 rounded-full blur-[100px] pointer-events-none animate-pulse-glow"></div>
-            <div class="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[220px] h-[220px] bg-rose-600/20 rounded-full blur-[70px] pointer-events-none"></div>
+            <div
+                class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[320px] h-[320px] bg-rose-900/25 rounded-full blur-[100px] pointer-events-none animate-pulse-glow">
+            </div>
+            <div
+                class="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[220px] h-[220px] bg-rose-600/20 rounded-full blur-[70px] pointer-events-none">
+            </div>
 
             <!-- ================= VISTA 1: RULETA 3D ================= -->
             <div id="view-ruleta" class="w-full h-full flex flex-col justify-between items-center py-4 px-4 z-20">
-                
+
                 <!-- Selector de Filtros por Persona -->
-                <div class="w-full flex items-center gap-2 overflow-x-auto no-scrollbar py-1" id="filter-chips-container">
-                    <span class="text-[11px] text-rose-300/60 font-semibold uppercase tracking-wider shrink-0 mr-1"><i class="fa-solid fa-filter text-rose-500"></i> Para:</span>
+                <div class="w-full flex items-center gap-2 overflow-x-auto no-scrollbar py-1"
+                    id="filter-chips-container">
+                    <span class="text-[11px] text-rose-300/60 font-semibold uppercase tracking-wider shrink-0 mr-1"><i
+                            class="fa-solid fa-filter text-rose-500"></i> Para:</span>
                     <!-- Inyectado mediante JS -->
                 </div>
 
                 <!-- Escenario Cilíndrico 3D -->
                 <div class="relative w-full h-[360px] my-auto flex items-center justify-center stage-3d select-none">
-                    
+
                     <!-- Marco Central de Selección -->
-                    <div class="absolute w-[280px] h-[64px] border-2 border-rose-400/90 rounded-[22px] bg-rose-500/15 pointer-events-none z-10 center-highlight-frame flex items-center justify-between px-3">
+                    <div
+                        class="absolute w-[280px] h-[64px] border-2 border-rose-400/90 rounded-[22px] bg-rose-500/15 pointer-events-none z-10 center-highlight-frame flex items-center justify-between px-3">
                         <i class="fa-solid fa-caret-right text-rose-400 text-base"></i>
                         <i class="fa-solid fa-caret-left text-rose-400 text-base"></i>
                     </div>
 
                     <!-- Superficie Táctil e Interacción por Desplazamiento -->
-                    <div id="drag-surface" class="absolute inset-0 z-20 cursor-grab active:cursor-grabbing rounded-3xl touch-none"></div>
+                    <div id="drag-surface"
+                        class="absolute inset-0 z-20 cursor-grab active:cursor-grabbing rounded-3xl touch-none"></div>
 
                     <!-- Tambor 3D de Platos -->
                     <div id="wheel-cylinder" class="wheel-cylinder w-full h-full flex items-center justify-center">
@@ -193,17 +225,20 @@
                     </div>
                 </div>
 
-                <!-- Botón Principal "HOY ME TOCA COMER" y Controles de Animación -->
+                <!-- Botón Principal "HOY TOCA COMER" y Controles de Animación -->
                 <div class="w-full flex flex-col items-center gap-2 mb-2">
-                    <button id="btn-spin-main" class="w-full py-4 rounded-2xl bg-gradient-to-r from-rose-600 via-rose-500 to-rose-700 hover:from-rose-500 hover:to-rose-600 text-white font-extrabold tracking-wider shadow-lg shadow-rose-900/70 border border-rose-300/30 text-lg flex items-center justify-center gap-3 active:scale-[0.97] transition">
+                    <button id="btn-spin-main"
+                        class="w-full py-4 rounded-2xl bg-gradient-to-r from-rose-600 via-rose-500 to-rose-700 hover:from-rose-500 hover:to-rose-600 text-white font-extrabold tracking-wider shadow-lg shadow-rose-900/70 border border-rose-300/30 text-lg flex items-center justify-center gap-3 active:scale-[0.97] transition">
                         <i class="fa-solid fa-dice text-xl animate-bounce"></i>
-                        <span>¡HOY ME TOCA COMER!</span>
+                        <span>¡HOY TOCA COMER!</span>
                     </button>
-                    
-                    <div class="flex items-center gap-3 text-[11px] text-rose-300/80 font-medium bg-rose-950/60 px-4 py-1.5 rounded-full border border-rose-800/40">
+
+                    <div
+                        class="flex items-center gap-3 text-[11px] text-rose-300/80 font-medium bg-rose-950/60 px-4 py-1.5 rounded-full border border-rose-800/40">
                         <!-- Control de Animación de Giro Suave Continuo -->
                         <button id="btn-ambient" class="hover:text-rose-100 transition flex items-center gap-1.5">
-                            <i id="ambient-icon" class="fa-solid fa-rotate animate-spin text-rose-400" style="animation-duration: 4s;"></i>
+                            <i id="ambient-icon" class="fa-solid fa-rotate animate-spin text-rose-400"
+                                style="animation-duration: 4s;"></i>
                             <span id="ambient-text" class="font-semibold text-rose-200">Giro Suave Activo</span>
                         </button>
                         <span class="text-rose-700">•</span>
@@ -217,7 +252,8 @@
             </div>
 
             <!-- ================= VISTA 2: CATÁLOGO DE PLATOS Y RECETAS ================= -->
-            <div id="view-platos" class="w-full h-full hidden z-20 flex flex-col p-4 overflow-y-auto no-scrollbar gap-4">
+            <div id="view-platos"
+                class="w-full h-full hidden z-20 flex flex-col p-4 overflow-y-auto no-scrollbar gap-4">
                 <div class="flex items-center justify-between glass-panel p-4 rounded-2xl">
                     <div>
                         <h2 class="text-base font-bold text-rose-100 flex items-center gap-2">
@@ -225,7 +261,8 @@
                         </h2>
                         <p class="text-[11px] text-rose-300/70">Personaliza platos, ingredientes y preferencias</p>
                     </div>
-                    <button id="btn-add-dish-catalog" class="py-2 px-3 rounded-xl bg-rose-600 hover:bg-rose-500 text-white font-semibold text-xs transition flex items-center gap-1.5 shadow-md shadow-rose-900/50 active:scale-95">
+                    <button id="btn-add-dish-catalog"
+                        class="py-2 px-3 rounded-xl bg-rose-600 hover:bg-rose-500 text-white font-semibold text-xs transition flex items-center gap-1.5 shadow-md shadow-rose-900/50 active:scale-95">
                         <i class="fa-solid fa-plus text-[10px]"></i>
                         <span>Añadir</span>
                     </button>
@@ -238,7 +275,8 @@
             </div>
 
             <!-- ================= VISTA 3: HISTORIAL DEL MES ================= -->
-            <div id="view-historial" class="w-full h-full hidden z-20 flex flex-col p-4 overflow-y-auto no-scrollbar gap-4">
+            <div id="view-historial"
+                class="w-full h-full hidden z-20 flex flex-col p-4 overflow-y-auto no-scrollbar gap-4">
                 <div class="glass-panel p-4 rounded-2xl flex items-center justify-between">
                     <div>
                         <h2 class="text-base font-bold text-rose-100 flex items-center gap-2">
@@ -246,7 +284,8 @@
                         </h2>
                         <p class="text-[11px] text-rose-300/70">Registro de lo que has seleccionado cocinar</p>
                     </div>
-                    <button id="btn-clear-history" class="px-3 py-1.5 rounded-xl bg-rose-950/80 border border-rose-800/40 text-rose-300 text-xs active:scale-95 transition">
+                    <button id="btn-clear-history"
+                        class="px-3 py-1.5 rounded-xl bg-rose-950/80 border border-rose-800/40 text-rose-300 text-xs active:scale-95 transition">
                         <i class="fa-solid fa-trash-can text-[10px] mr-1"></i> Borrar
                     </button>
                 </div>
@@ -259,23 +298,30 @@
         </main>
 
         <!-- Barra de Navegación Inferior Móvil (3 Íconos) -->
-        <nav class="w-full py-2.5 px-6 glass-panel border-t border-rose-900/40 flex items-center justify-between z-30 shrink-0">
-            <button id="nav-ruleta" class="nav-btn active flex flex-col items-center gap-1 text-[11px] font-semibold text-rose-300/70 transition w-20">
-                <div class="nav-icon-bg w-12 h-7 rounded-xl flex items-center justify-center border border-transparent transition">
-                    <i class="fa-solid fa-dharmachakra text-base"></i>
+        <nav
+            class="w-full py-2.5 px-6 glass-panel border-t border-rose-900/40 flex items-center justify-between z-30 shrink-0">
+            <button id="nav-ruleta"
+                class="nav-btn active flex flex-col items-center gap-1 text-[11px] font-semibold text-rose-300/70 transition w-20">
+                <div
+                    class="nav-icon-bg w-12 h-7 rounded-xl flex items-center justify-center border border-transparent transition">
+                    <i class="fa-solid fa-bowl-food text-base"></i>
                 </div>
                 <span>Ruleta</span>
             </button>
 
-            <button id="nav-platos" class="nav-btn flex flex-col items-center gap-1 text-[11px] font-semibold text-rose-300/70 transition w-20">
-                <div class="nav-icon-bg w-12 h-7 rounded-xl flex items-center justify-center border border-transparent transition">
+            <button id="nav-platos"
+                class="nav-btn flex flex-col items-center gap-1 text-[11px] font-semibold text-rose-300/70 transition w-20">
+                <div
+                    class="nav-icon-bg w-12 h-7 rounded-xl flex items-center justify-center border border-transparent transition">
                     <i class="fa-solid fa-utensils text-base"></i>
                 </div>
                 <span>Recetas</span>
             </button>
 
-            <button id="nav-historial" class="nav-btn flex flex-col items-center gap-1 text-[11px] font-semibold text-rose-300/70 transition w-20">
-                <div class="nav-icon-bg w-12 h-7 rounded-xl flex items-center justify-center border border-transparent transition">
+            <button id="nav-historial"
+                class="nav-btn flex flex-col items-center gap-1 text-[11px] font-semibold text-rose-300/70 transition w-20">
+                <div
+                    class="nav-icon-bg w-12 h-7 rounded-xl flex items-center justify-center border border-transparent transition">
                     <i class="fa-solid fa-calendar-days text-base"></i>
                 </div>
                 <span>Historial</span>
@@ -283,9 +329,12 @@
         </nav>
 
         <!-- ================= MODAL BOTTOM SHEET: PLATO SELECCIONADO / RECETA ================= -->
-        <div id="winner-modal-backdrop" class="absolute inset-0 bg-black/70 backdrop-blur-sm z-40 opacity-0 pointer-events-none transition-opacity duration-300"></div>
-        <div id="winner-modal" class="bottom-sheet bottom-sheet-hidden absolute bottom-0 left-0 right-0 glass-panel border-t-2 border-rose-500/60 rounded-t-[32px] p-5 z-50 flex flex-col max-h-[85%] shadow-2xl shadow-rose-950">
-            
+        <div id="winner-modal-backdrop"
+            class="absolute inset-0 bg-black/70 backdrop-blur-sm z-40 opacity-0 pointer-events-none transition-opacity duration-300">
+        </div>
+        <div id="winner-modal"
+            class="bottom-sheet bottom-sheet-hidden absolute bottom-0 left-0 right-0 glass-panel border-t-2 border-rose-500/60 rounded-t-[32px] p-5 z-50 flex flex-col max-h-[85%] shadow-2xl shadow-rose-950">
+
             <div class="w-12 h-1 bg-rose-800/60 rounded-full mx-auto mb-4"></div>
 
             <div class="flex items-center justify-between pb-3 border-b border-rose-900/40">
@@ -300,7 +349,8 @@
 
             <div class="my-3 overflow-y-auto no-scrollbar space-y-4 pr-1">
                 <!-- Título del Plato -->
-                <div id="modal-dish-title" class="text-xl font-bold text-white font-mono-custom bg-gradient-to-r from-rose-900/70 to-rose-950/80 p-3 rounded-2xl border border-rose-800/50 text-center shadow-inner">
+                <div id="modal-dish-title"
+                    class="text-xl font-bold text-white font-mono-custom bg-gradient-to-r from-rose-900/70 to-rose-950/80 p-3 rounded-2xl border border-rose-800/50 text-center shadow-inner">
                     Lomo Saltado
                 </div>
 
@@ -317,10 +367,12 @@
                 <!-- Desglose de Ingredientes con soportes -->
                 <div>
                     <h4 class="text-xs text-rose-300/70 font-semibold mb-2 flex items-center justify-between">
-                        <span class="flex items-center gap-1.5"><i class="fa-solid fa-list-check text-rose-400"></i> Ingredientes del plato:</span>
+                        <span class="flex items-center gap-1.5"><i class="fa-solid fa-list-check text-rose-400"></i>
+                            Ingredientes del plato:</span>
                         <span class="text-[10px] text-rose-400/70">Marca los que ya tienes</span>
                     </h4>
-                    <ul id="modal-dish-ingredients" class="space-y-1.5 text-xs bg-rose-950/50 p-3 rounded-2xl border border-rose-900/40 font-mono-custom">
+                    <ul id="modal-dish-ingredients"
+                        class="space-y-1.5 text-xs bg-rose-950/50 p-3 rounded-2xl border border-rose-900/40 font-mono-custom">
                         <!-- Ítems inyectados por JS -->
                     </ul>
                 </div>
@@ -328,7 +380,8 @@
 
             <!-- Botones de Acción -->
             <div class="pt-3 border-t border-rose-900/40 flex flex-col gap-2 shrink-0">
-                <button id="btn-confirm-menu" class="w-full py-3.5 rounded-2xl bg-gradient-to-r from-rose-600 to-rose-500 text-white font-bold transition shadow-lg shadow-rose-900/60 text-xs flex items-center justify-center gap-2 active:scale-95">
+                <button id="btn-confirm-menu"
+                    class="w-full py-3.5 rounded-2xl bg-gradient-to-r from-rose-600 to-rose-500 text-white font-bold transition shadow-lg shadow-rose-900/60 text-xs flex items-center justify-center gap-2 active:scale-95">
                     <i class="fa-solid fa-check"></i>
                     <span>Confirmar para Menú de Hoy</span>
                 </button>
@@ -336,9 +389,12 @@
         </div>
 
         <!-- ================= MODAL BOTTOM SHEET: AGREGAR / EDITAR PLATO ================= -->
-        <div id="add-dish-backdrop" class="absolute inset-0 bg-black/70 backdrop-blur-sm z-40 opacity-0 pointer-events-none transition-opacity duration-300"></div>
-        <div id="add-dish-modal" class="bottom-sheet bottom-sheet-hidden absolute bottom-0 left-0 right-0 glass-panel border-t-2 border-rose-500/60 rounded-t-[32px] p-5 z-50 flex flex-col max-h-[90%] shadow-2xl shadow-rose-950">
-            
+        <div id="add-dish-backdrop"
+            class="absolute inset-0 bg-black/70 backdrop-blur-sm z-40 opacity-0 pointer-events-none transition-opacity duration-300">
+        </div>
+        <div id="add-dish-modal"
+            class="bottom-sheet bottom-sheet-hidden absolute bottom-0 left-0 right-0 glass-panel border-t-2 border-rose-500/60 rounded-t-[32px] p-5 z-50 flex flex-col max-h-[90%] shadow-2xl shadow-rose-950">
+
             <div class="w-12 h-1 bg-rose-800/60 rounded-full mx-auto mb-3"></div>
 
             <div class="flex items-center justify-between pb-3 border-b border-rose-900/40 mb-3">
@@ -352,30 +408,36 @@
 
             <form id="form-add-dish" class="space-y-4 overflow-y-auto no-scrollbar pr-1 pb-2">
                 <input type="hidden" id="input-dish-id" value="">
-                
+
                 <!-- Nombre del Plato -->
                 <div>
                     <label class="block text-xs font-semibold text-rose-300/90 mb-1.5 flex items-center gap-1.5">
                         <i class="fa-solid fa-utensils text-rose-500"></i> Nombre del Plato Criollo
                     </label>
-                    <input type="text" id="input-dish-name" required placeholder="Ej: Arroz con Pato" class="w-full bg-rose-950/80 border border-rose-700/50 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-rose-400 focus:ring-1 focus:ring-rose-400 font-medium">
+                    <input type="text" id="input-dish-name" required placeholder="Ej: Arroz con Pato"
+                        class="w-full bg-rose-950/80 border border-rose-700/50 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-rose-400 focus:ring-1 focus:ring-rose-400 font-medium">
                 </div>
 
                 <!-- Ingredientes en Soportes / Chips -->
                 <div>
-                    <label class="block text-xs font-semibold text-rose-300/90 mb-1.5 flex items-center justify-between">
-                        <span class="flex items-center gap-1.5"><i class="fa-solid fa-list-check text-rose-500"></i> Ingredientes (en Soportes)</span>
+                    <label
+                        class="block text-xs font-semibold text-rose-300/90 mb-1.5 flex items-center justify-between">
+                        <span class="flex items-center gap-1.5"><i class="fa-solid fa-list-check text-rose-500"></i>
+                            Ingredientes (en Soportes)</span>
                         <span class="text-[10px] text-rose-400/60">Presiona Enter o +</span>
                     </label>
-                    
+
                     <div class="p-3 bg-rose-950/40 border border-rose-800/40 rounded-2xl flex flex-col gap-2.5">
                         <div id="ingredients-chips-container" class="flex flex-wrap gap-1.5 min-h-[36px] items-center">
                             <!-- Inyectados dinámicamente -->
                         </div>
 
                         <div class="flex items-center gap-2">
-                            <input type="text" id="input-add-ingredient" placeholder="Escribe ingrediente y presiona Enter..." class="flex-1 bg-rose-950/90 border border-rose-800/60 rounded-xl px-3 py-1.5 text-xs text-white focus:outline-none focus:border-rose-500 font-mono-custom">
-                            <button type="button" id="btn-add-ingredient-chip" class="px-3 py-1.5 rounded-xl bg-rose-800/80 hover:bg-rose-700 text-rose-200 border border-rose-600/50 text-xs font-bold active:scale-95 transition">
+                            <input type="text" id="input-add-ingredient"
+                                placeholder="Escribe ingrediente y presiona Enter..."
+                                class="flex-1 bg-rose-950/90 border border-rose-800/60 rounded-xl px-3 py-1.5 text-xs text-white focus:outline-none focus:border-rose-500 font-mono-custom">
+                            <button type="button" id="btn-add-ingredient-chip"
+                                class="px-3 py-1.5 rounded-xl bg-rose-800/80 hover:bg-rose-700 text-rose-200 border border-rose-600/50 text-xs font-bold active:scale-95 transition">
                                 <i class="fa-solid fa-plus"></i>
                             </button>
                         </div>
@@ -397,8 +459,10 @@
                         </div>
 
                         <div class="pt-2 border-t border-rose-900/40 flex items-center gap-2">
-                            <input type="text" id="input-add-person" placeholder="Nueva persona (Ej: Abuela, Tío)..." class="flex-1 bg-rose-950/90 border border-rose-800/60 rounded-xl px-3 py-1.5 text-xs text-white focus:outline-none focus:border-rose-500">
-                            <button type="button" id="btn-add-person-chip" class="px-3 py-1.5 rounded-xl bg-rose-700 hover:bg-rose-600 text-white border border-rose-500/50 text-xs font-bold active:scale-95 transition flex items-center gap-1">
+                            <input type="text" id="input-add-person" placeholder="Nueva persona (Ej: Abuela, Tío)..."
+                                class="flex-1 bg-rose-950/90 border border-rose-800/60 rounded-xl px-3 py-1.5 text-xs text-white focus:outline-none focus:border-rose-500">
+                            <button type="button" id="btn-add-person-chip"
+                                class="px-3 py-1.5 rounded-xl bg-rose-700 hover:bg-rose-600 text-white border border-rose-500/50 text-xs font-bold active:scale-95 transition flex items-center gap-1">
                                 <i class="fa-solid fa-user-plus text-[10px]"></i>
                                 <span>Añadir</span>
                             </button>
@@ -407,7 +471,8 @@
                 </div>
 
                 <div class="pt-2">
-                    <button type="submit" id="btn-submit-dish" class="w-full py-3.5 rounded-2xl bg-gradient-to-r from-rose-600 via-rose-500 to-rose-600 hover:from-rose-500 hover:to-rose-600 text-white font-extrabold text-xs tracking-wider shadow-lg shadow-rose-950/80 border border-rose-400/30 transition active:scale-[0.98]">
+                    <button type="submit" id="btn-submit-dish"
+                        class="w-full py-3.5 rounded-2xl bg-gradient-to-r from-rose-600 via-rose-500 to-rose-600 hover:from-rose-500 hover:to-rose-600 text-white font-extrabold text-xs tracking-wider shadow-lg shadow-rose-950/80 border border-rose-400/30 transition active:scale-[0.98]">
                         Guardar Plato
                     </button>
                 </div>
@@ -426,7 +491,7 @@
                 id: "1",
                 name: "Lomo Saltado",
                 ingredients: ["Carne de res (lomo)", "Cebolla roja", "Tomate", "Papas fritas", "Sillao", "Vinagre", "Arroz blanco"],
-                favorites: ["Papá", "Hijos", "Hermanos"]
+                favorites: ["Papá", "Hijos", "Abuelo"]
             },
             {
                 id: "2",
@@ -444,7 +509,7 @@
                 id: "4",
                 name: "Arroz Chaufa",
                 ingredients: ["Arroz cocido", "Pollo o chancho asado", "Huevo (tortilla)", "Cebollita china", "Sillao", "Aceite de ajonjolí", "Kión"],
-                favorites: ["Papá", "Hermanos", "Hijos"]
+                favorites: ["Papá", "Abuelo", "Hijos"]
             },
             {
                 id: "5",
@@ -456,11 +521,11 @@
                 id: "6",
                 name: "Causa Rellena",
                 ingredients: ["Papa amarilla", "Ají amarillo", "Limón", "Pollo deshilachado o atún", "Mayonesa", "Palta", "Huevo duro"],
-                favorites: ["Mamá", "Hijos", "Hermanos"]
+                favorites: ["Mamá", "Hijos", "Abuelo"]
             },
             {
                 id: "7",
-                name: "Seco de Res con Frijoles",
+                name: "Seco de Res c/ Frijoles",
                 ingredients: ["Carne de res", "Frijoles canario", "Cilantro molido", "Chicha de jora", "Zanahoria", "Arvejas", "Arroz blanco"],
                 favorites: ["Papá", "Mamá"]
             },
@@ -468,29 +533,29 @@
                 id: "8",
                 name: "Carapulcra con Sopa Seca",
                 ingredients: ["Papa seca tostada", "Carne de chancho", "Tallarines", "Albahaca y cilantro", "Ají panca", "Maní molido"],
-                favorites: ["Papá", "Hermanos"]
+                favorites: ["Papá", "Abuelo"]
             },
             {
                 id: "9",
-                name: "Tallarines Verdes con Bistec",
+                name: "Tallarines Verdes",
                 ingredients: ["Tallarines", "Albahaca fresca", "Espinaca", "Queso fresco", "Leche evaporada", "Bistec de res apanado"],
-                favorites: ["Hijos", "Hermanos"]
+                favorites: ["Hijos", "Abuelo"]
             },
             {
                 id: "10",
-                name: "Papa a la Huancaína con Arroz",
+                name: "Papa a la Huancaína",
                 ingredients: ["Papas sancochadas", "Ají amarillo", "Queso fresco", "Leche", "Galletas de soda", "Aceitunas", "Huevo sancochado"],
                 favorites: ["Mamá", "Hijos"]
             },
             {
                 id: "11",
-                name: "Tacu Tacu con Sábana de Carne",
+                name: "Tacu Tacu de Carne",
                 ingredients: ["Arroz y frijoles del día anterior", "Bistec delgado", "Sarsa criolla", "Plátano frito", "Huevo frito"],
-                favorites: ["Papá", "Hermanos"]
+                favorites: ["Papá", "Abuelo"]
             },
             {
                 id: "12",
-                name: "Mondonguito a la Italiana",
+                name: "Mondonguito Italiano",
                 ingredients: ["Mondongo sancochado", "Papas fritas en hilos", "Zanahoria", "Hongos y laurel", "Queso parmesano", "Ají amarillo"],
                 favorites: ["Mamá", "Papá"]
             }
@@ -566,7 +631,7 @@
             constructor() {
                 this.dishes = [...initialDishes];
                 this.activeDishes = [...this.dishes];
-                this.people = ["Mamá", "Papá", "Hijos", "Hermanos"];
+                this.people = ["Mamá", "Papá", "Hijos", "Abuelo"];
                 this.history = [];
                 this.selectedDish = null;
 
@@ -669,7 +734,7 @@
                 } else {
                     this.activeDishes = this.dishes.filter(d => d.favorites.includes(familyMember));
                 }
-                
+
                 if (this.activeDishes.length === 0) {
                     this.activeDishes = [...this.dishes];
                 }
@@ -688,7 +753,7 @@
                 for (let i = 0; i < total; i++) {
                     const card = document.createElement('div');
                     card.className = 'roulette-card item-passive font-mono-custom text-sm font-bold tracking-wide';
-                    
+
                     card.style.width = `${this.cardWidth}px`;
                     card.style.height = `${this.cardHeight}px`;
                     card.style.marginTop = `-${this.cardHeight / 2}px`;
@@ -754,10 +819,10 @@
 
                 const total = this.activeDishes.length;
                 const randomIndex = Math.floor(Math.random() * total);
-                
+
                 const fullSpins = 4 + Math.floor(Math.random() * 3);
                 const targetAngleForIndex = - (randomIndex * this.angleStep);
-                
+
                 let currentNormalized = this.currentAngle;
                 const finalTargetAngle = currentNormalized + (fullSpins * 360) + (targetAngleForIndex - (currentNormalized % 360));
 
@@ -790,10 +855,10 @@
 
             showSelectedDishModal(dish) {
                 this.selectedDish = dish;
-                
+
                 const backdrop = document.getElementById('winner-modal-backdrop');
                 const modal = document.getElementById('winner-modal');
-                
+
                 document.getElementById('modal-dish-title').textContent = dish.name;
 
                 // Badges de preferencias familiares en soporte
@@ -845,7 +910,7 @@
 
             confirmMenuForToday() {
                 if (!this.selectedDish) return;
-                
+
                 const today = new Date().toLocaleDateString('es-PE', {
                     weekday: 'short',
                     day: 'numeric',
@@ -869,7 +934,7 @@
                 this.dishes.forEach(dish => {
                     const card = document.createElement('div');
                     card.className = 'glass-panel p-4 rounded-2xl flex flex-col gap-3 border border-rose-800/40 shadow-lg shadow-rose-950/40';
-                    
+
                     let favsHtml = dish.favorites.map(f => `
                         <span class="px-2.5 py-0.5 rounded-full bg-rose-950/80 text-rose-300 border border-rose-600/40 text-[11px] font-semibold flex items-center gap-1">
                             <i class="fa-solid fa-heart text-rose-500 text-[9px]"></i> ${f}
@@ -976,13 +1041,12 @@
 
                 this.people.forEach(person => {
                     const isSelected = this.currentFormSelectedMembers.includes(person);
-                    
+
                     const chip = document.createElement('div');
-                    chip.className = `px-3 py-1.5 rounded-xl border transition cursor-pointer select-none flex items-center gap-2 text-xs font-bold ${
-                        isSelected 
-                            ? 'bg-rose-600 border-rose-400 text-white shadow-md shadow-rose-900/60' 
-                            : 'bg-rose-950/70 border-rose-800/60 text-rose-300 hover:border-rose-600/50'
-                    }`;
+                    chip.className = `px-3 py-1.5 rounded-xl border transition cursor-pointer select-none flex items-center gap-2 text-xs font-bold ${isSelected
+                        ? 'bg-rose-600 border-rose-400 text-white shadow-md shadow-rose-900/60'
+                        : 'bg-rose-950/70 border-rose-800/60 text-rose-300 hover:border-rose-600/50'
+                        }`;
 
                     chip.innerHTML = `
                         <span class="flex items-center gap-1">
@@ -1032,7 +1096,7 @@
                 }
                 this.people = this.people.filter(p => p !== personName);
                 this.currentFormSelectedMembers = this.currentFormSelectedMembers.filter(p => p !== personName);
-                
+
                 this.dishes.forEach(d => {
                     d.favorites = d.favorites.filter(p => p !== personName);
                 });
@@ -1222,12 +1286,12 @@
 
                     if (!name) return;
 
-                    const ingredients = this.currentFormIngredients.length > 0 
-                        ? [...this.currentFormIngredients] 
+                    const ingredients = this.currentFormIngredients.length > 0
+                        ? [...this.currentFormIngredients]
                         : ["Ingredientes por definir"];
 
-                    const favorites = this.currentFormSelectedMembers.length > 0 
-                        ? [...this.currentFormSelectedMembers] 
+                    const favorites = this.currentFormSelectedMembers.length > 0
+                        ? [...this.currentFormSelectedMembers]
                         : ["Todos"];
 
                     if (dishId) {
@@ -1262,7 +1326,7 @@
                     if (this.isSpinning) return;
                     this.soundEngine.init();
                     this.isDragging = true;
-                    
+
                     const clientY = e.touches ? e.touches[0].clientY : e.clientY;
                     this.startY = clientY;
                     this.lastY = clientY;
@@ -1382,4 +1446,5 @@
         });
     </script>
 </body>
+
 </html>
