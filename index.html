@@ -1,8 +1,26 @@
 <!DOCTYPE html>
+<!--
+  ==================================================
+  PROPIEDAD INTELECTUAL Y DESARROLLO
+
+  © 2026 zeytox. Todos los derechos reservados.
+
+  Diseño y desarrollo: Marcus - Zeytox
+  Github: https://github.com/zioxo
+  Proyecto: PickEat
+  Versión: 4.0
+  Fecha: 12 de Agosto de 2026
+
+  Este código y su diseño están protegidos por derechos
+  de autor. No se permite su copia, modificación,
+  distribución o uso comercial sin autorización previa.
+  ==================================================
+-->
 <html lang="es" class="h-full bg-black">
 
 <head>
     <meta charset="UTF-8">
+    <link rel="icon" type="image/png" href="https://i.postimg.cc/3rZ85r6V/pickeatbyzey.jpg">
     <meta name="viewport"
         content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>PickEat - App Móvil</title>
@@ -155,6 +173,7 @@
                 opacity: 0;
                 transform: scale(0.92);
             }
+
             to {
                 opacity: 1;
                 transform: scale(1);
@@ -231,14 +250,16 @@
                     <!-- Selector de Filtros por Persona -->
                     <div class="w-full flex items-center gap-2 overflow-x-auto no-scrollbar py-1"
                         id="filter-chips-container">
-                        <span class="text-[11px] text-rose-300/60 font-semibold uppercase tracking-wider shrink-0 mr-1"><i
+                        <span
+                            class="text-[11px] text-rose-300/60 font-semibold uppercase tracking-wider shrink-0 mr-1"><i
                                 class="fa-solid fa-filter text-rose-500"></i> Para:</span>
                         <!-- Inyectado mediante JS -->
                     </div>
                 </div>
 
                 <!-- Escenario Cilíndrico 3D -->
-                <div id="wheel-stage-container" class="relative w-full h-[340px] my-auto flex items-center justify-center stage-3d select-none">
+                <div id="wheel-stage-container"
+                    class="relative w-full h-[340px] my-auto flex items-center justify-center stage-3d select-none">
 
                     <!-- Marco Central de Selección -->
                     <div
@@ -265,7 +286,8 @@
                         <i class="fa-solid fa-rotate-left text-rose-400"></i>
                     </div>
                     <h3 class="text-base font-extrabold text-white mb-1.5 font-mono-custom">¡Ruleta Completada!</h3>
-                    <p class="text-xs text-rose-300/80 mb-5 leading-relaxed">Se han seleccionado todos los platos de esta categoría. Presiona el botón para reiniciar la ruleta con todas las opciones.</p>
+                    <p class="text-xs text-rose-300/80 mb-5 leading-relaxed">Se han seleccionado todos los platos de
+                        esta categoría. Presiona el botón para reiniciar la ruleta con todas las opciones.</p>
                     <button id="btn-reset-wheel-empty"
                         class="w-full py-3.5 px-5 rounded-2xl bg-gradient-to-r from-rose-600 via-rose-500 to-rose-600 hover:from-rose-500 hover:to-rose-600 text-white font-extrabold text-xs tracking-wider shadow-lg shadow-rose-900/80 border border-rose-300/40 active:scale-95 transition flex items-center justify-center gap-2">
                         <i class="fa-solid fa-arrow-rotate-right text-sm"></i>
