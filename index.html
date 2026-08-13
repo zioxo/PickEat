@@ -92,7 +92,7 @@
             border: 1px solid rgba(225, 29, 72, 0.22);
         }
 
-        /* Marro central de resalte con luz */
+        /* Marco central de resalte con luz */
         .center-highlight-frame {
             pointer-events: none;
             border-radius: 22px;
@@ -149,6 +149,21 @@
         .animate-pulse-glow {
             animation: pulseGlow 3s infinite ease-in-out;
         }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.92);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .animate-fade-in {
+            animation: fadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
     </style>
 </head>
 
@@ -195,18 +210,35 @@
             </div>
 
             <!-- ================= VISTA 1: RULETA 3D ================= -->
-            <div id="view-ruleta" class="w-full h-full flex flex-col justify-between items-center py-4 px-4 z-20">
+            <div id="view-ruleta" class="w-full h-full flex flex-col justify-between items-center py-3 px-4 z-20">
 
-                <!-- Selector de Filtros por Persona -->
-                <div class="w-full flex items-center gap-2 overflow-x-auto no-scrollbar py-1"
-                    id="filter-chips-container">
-                    <span class="text-[11px] text-rose-300/60 font-semibold uppercase tracking-wider shrink-0 mr-1"><i
-                            class="fa-solid fa-filter text-rose-500"></i> Para:</span>
-                    <!-- Inyectado mediante JS -->
+                <!-- Barra Superior de Ruleta: Filtros y Contador de Platos Disponibles -->
+                <div class="w-full flex flex-col gap-2">
+                    <div class="w-full flex items-center justify-between px-1">
+                        <span id="remaining-dishes-badge"
+                            class="px-2.5 py-1 rounded-full bg-rose-950/80 border border-rose-800/50 text-[11px] font-semibold text-rose-300 flex items-center gap-1.5 shadow-sm">
+                            <i class="fa-solid fa-chart-pie text-rose-500"></i>
+                            <span id="remaining-count">12 / 12</span> disponibles
+                        </span>
+                        <button id="btn-manual-reset-wheel"
+                            class="px-2.5 py-1 rounded-full bg-rose-950/60 hover:bg-rose-900/80 border border-rose-800/40 text-[11px] font-medium text-rose-300 transition flex items-center gap-1 active:scale-95"
+                            title="Reiniciar Ruleta">
+                            <i class="fa-solid fa-rotate-left text-rose-400 text-[10px]"></i>
+                            <span>Reiniciar</span>
+                        </button>
+                    </div>
+
+                    <!-- Selector de Filtros por Persona -->
+                    <div class="w-full flex items-center gap-2 overflow-x-auto no-scrollbar py-1"
+                        id="filter-chips-container">
+                        <span class="text-[11px] text-rose-300/60 font-semibold uppercase tracking-wider shrink-0 mr-1"><i
+                                class="fa-solid fa-filter text-rose-500"></i> Para:</span>
+                        <!-- Inyectado mediante JS -->
+                    </div>
                 </div>
 
                 <!-- Escenario Cilíndrico 3D -->
-                <div class="relative w-full h-[360px] my-auto flex items-center justify-center stage-3d select-none">
+                <div id="wheel-stage-container" class="relative w-full h-[340px] my-auto flex items-center justify-center stage-3d select-none">
 
                     <!-- Marco Central de Selección -->
                     <div
@@ -225,8 +257,24 @@
                     </div>
                 </div>
 
+                <!-- Mensaje de Ruleta Agotada (Aparece cuando ya no quedan platos) -->
+                <div id="empty-wheel-container"
+                    class="hidden my-auto flex flex-col items-center justify-center text-center p-6 glass-panel rounded-3xl border border-rose-500/40 max-w-[320px] shadow-2xl animate-fade-in">
+                    <div
+                        class="w-16 h-16 rounded-full bg-rose-950/80 border border-rose-500/50 flex items-center justify-center mb-3 text-rose-400 text-2xl shadow-lg shadow-rose-900/50">
+                        <i class="fa-solid fa-rotate-left text-rose-400"></i>
+                    </div>
+                    <h3 class="text-base font-extrabold text-white mb-1.5 font-mono-custom">¡Ruleta Completada!</h3>
+                    <p class="text-xs text-rose-300/80 mb-5 leading-relaxed">Se han seleccionado todos los platos de esta categoría. Presiona el botón para reiniciar la ruleta con todas las opciones.</p>
+                    <button id="btn-reset-wheel-empty"
+                        class="w-full py-3.5 px-5 rounded-2xl bg-gradient-to-r from-rose-600 via-rose-500 to-rose-600 hover:from-rose-500 hover:to-rose-600 text-white font-extrabold text-xs tracking-wider shadow-lg shadow-rose-900/80 border border-rose-300/40 active:scale-95 transition flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-arrow-rotate-right text-sm"></i>
+                        <span>REINICIAR RULETA</span>
+                    </button>
+                </div>
+
                 <!-- Botón Principal "HOY TOCA COMER" y Controles de Animación -->
-                <div class="w-full flex flex-col items-center gap-2 mb-2">
+                <div id="wheel-controls-container" class="w-full flex flex-col items-center gap-2 mb-1">
                     <button id="btn-spin-main"
                         class="w-full py-4 rounded-2xl bg-gradient-to-r from-rose-600 via-rose-500 to-rose-700 hover:from-rose-500 hover:to-rose-600 text-white font-extrabold tracking-wider shadow-lg shadow-rose-900/70 border border-rose-300/30 text-lg flex items-center justify-center gap-3 active:scale-[0.97] transition">
                         <i class="fa-solid fa-dice text-xl animate-bounce"></i>
@@ -383,7 +431,7 @@
                 <button id="btn-confirm-menu"
                     class="w-full py-3.5 rounded-2xl bg-gradient-to-r from-rose-600 to-rose-500 text-white font-bold transition shadow-lg shadow-rose-900/60 text-xs flex items-center justify-center gap-2 active:scale-95">
                     <i class="fa-solid fa-check"></i>
-                    <span>Confirmar para Menú de Hoy</span>
+                    <span>Confirmar para Menú de Hoy (Quitar de la ruleta)</span>
                 </button>
             </div>
         </div>
@@ -630,7 +678,9 @@
         class MenuApp {
             constructor() {
                 this.dishes = [...initialDishes];
-                this.activeDishes = [...this.dishes];
+                this.usedDishIds = new Set(); // Conjunto de platos ya seleccionados en la ruleta
+                this.currentFilter = 'ALL';
+                this.activeDishes = [];
                 this.people = ["Mamá", "Papá", "Hijos", "Abuelo"];
                 this.history = [];
                 this.selectedDish = null;
@@ -661,6 +711,9 @@
                 // Elementos DOM
                 this.cylinderEl = document.getElementById('wheel-cylinder');
                 this.dragSurface = document.getElementById('drag-surface');
+                this.stageContainer = document.getElementById('wheel-stage-container');
+                this.controlsContainer = document.getElementById('wheel-controls-container');
+                this.emptyWheelContainer = document.getElementById('empty-wheel-container');
 
                 this.initDOM();
                 this.setupEventListeners();
@@ -670,7 +723,7 @@
 
             initDOM() {
                 this.renderFilterChips();
-                this.rebuildWheel();
+                this.filterDishes('ALL');
                 this.renderDishesGrid();
                 this.renderHistory();
                 this.updateAmbientUIStatus();
@@ -692,7 +745,7 @@
 
             renderFilterChips() {
                 const container = document.getElementById('filter-chips-container');
-                const currentActive = document.querySelector('.filter-chip.active')?.getAttribute('data-family') || 'ALL';
+                const currentActive = this.currentFilter;
 
                 container.innerHTML = `
                     <span class="text-[11px] text-rose-300/60 font-semibold uppercase tracking-wider shrink-0 mr-1"><i class="fa-solid fa-filter text-rose-500"></i> Para:</span>
@@ -729,24 +782,50 @@
             }
 
             filterDishes(familyMember) {
-                if (familyMember === 'ALL' || !familyMember) {
-                    this.activeDishes = [...this.dishes];
-                } else {
-                    this.activeDishes = this.dishes.filter(d => d.favorites.includes(familyMember));
+                this.currentFilter = familyMember || 'ALL';
+
+                // Obtener platos totales según filtro de integrante
+                let totalCategoryDishes = this.dishes;
+                if (this.currentFilter !== 'ALL') {
+                    totalCategoryDishes = this.dishes.filter(d => d.favorites.includes(this.currentFilter));
                 }
 
-                if (this.activeDishes.length === 0) {
-                    this.activeDishes = [...this.dishes];
+                // Filtrar solo los platos que no han sido seleccionados aún
+                this.activeDishes = totalCategoryDishes.filter(d => !this.usedDishIds.has(d.id));
+
+                // Actualizar badge de platos restantes
+                const remainingBadge = document.getElementById('remaining-count');
+                if (remainingBadge) {
+                    remainingBadge.textContent = `${this.activeDishes.length} / ${totalCategoryDishes.length}`;
                 }
 
                 this.rebuildWheel();
             }
 
+            // Reiniciar ruleta restaurando todos los platos
+            resetRoulette() {
+                this.usedDishIds.clear();
+                this.filterDishes(this.currentFilter);
+                this.soundEngine.playTick();
+            }
+
             rebuildWheel() {
                 this.cylinderEl.innerHTML = '';
                 const total = this.activeDishes.length;
-                this.angleStep = 360 / total;
 
+                // Manejar Estado Vacío cuando se terminan los platos de la ruleta
+                if (total === 0) {
+                    this.stageContainer.classList.add('hidden');
+                    this.controlsContainer.classList.add('hidden');
+                    this.emptyWheelContainer.classList.remove('hidden');
+                    return;
+                } else {
+                    this.stageContainer.classList.remove('hidden');
+                    this.controlsContainer.classList.remove('hidden');
+                    this.emptyWheelContainer.classList.add('hidden');
+                }
+
+                this.angleStep = 360 / total;
                 this.radius = Math.max(140, Math.min(260, (total * (this.cardHeight + 10)) / (2 * Math.PI)));
                 this.cards = [];
 
@@ -797,27 +876,31 @@
                     const scale = 0.85 + 0.15 * Math.max(0, cosVal);
 
                     const card = this.cards[i];
-                    card.style.transform = `translateY(${translateY}px) translateZ(${translateZ}px) rotateX(${rotateX}deg) scale(${scale})`;
-                    card.style.opacity = opacity.toFixed(2);
+                    if (card) {
+                        card.style.transform = `translateY(${translateY}px) translateZ(${translateZ}px) rotateX(${rotateX}deg) scale(${scale})`;
+                        card.style.opacity = opacity.toFixed(2);
 
-                    if (i === activeIdx) {
-                        card.classList.remove('item-passive');
-                        card.classList.add('item-active');
-                        card.style.zIndex = '30';
-                    } else {
-                        card.classList.remove('item-active');
-                        card.classList.add('item-passive');
-                        card.style.zIndex = Math.round((cosVal + 1) * 10);
+                        if (i === activeIdx) {
+                            card.classList.remove('item-passive');
+                            card.classList.add('item-active');
+                            card.style.zIndex = '30';
+                        } else {
+                            card.classList.remove('item-active');
+                            card.classList.add('item-passive');
+                            card.style.zIndex = Math.round((cosVal + 1) * 10);
+                        }
                     }
                 }
             }
 
             spinToRandom() {
                 if (this.isSpinning) return;
+                const total = this.activeDishes.length;
+                if (total === 0) return;
+
                 this.soundEngine.init();
                 this.isSpinning = true;
 
-                const total = this.activeDishes.length;
                 const randomIndex = Math.floor(Math.random() * total);
 
                 const fullSpins = 4 + Math.floor(Math.random() * 3);
@@ -854,6 +937,7 @@
             }
 
             showSelectedDishModal(dish) {
+                if (!dish) return;
                 this.selectedDish = dish;
 
                 const backdrop = document.getElementById('winner-modal-backdrop');
@@ -917,6 +1001,10 @@
                     month: 'short'
                 });
 
+                // Marcar plato como ya seleccionado para quitarlo de la ruleta
+                this.usedDishIds.add(this.selectedDish.id);
+
+                // Agregar al historial
                 this.history.unshift({
                     date: today,
                     dish: this.selectedDish.name
@@ -924,6 +1012,9 @@
 
                 this.renderHistory();
                 this.closeDishModal();
+
+                // Actualizar ruleta quitando el plato seleccionado
+                this.filterDishes(this.currentFilter);
                 this.switchTab('historial');
             }
 
@@ -990,12 +1081,11 @@
 
             deleteDish(dishId) {
                 if (this.dishes.length <= 1) {
-                    alert("Debes tener al menos un plato registrado.");
                     return;
                 }
                 this.dishes = this.dishes.filter(d => d.id !== dishId);
-                const activeFilter = document.querySelector('.filter-chip.active')?.getAttribute('data-family') || 'ALL';
-                this.filterDishes(activeFilter);
+                this.usedDishIds.delete(dishId);
+                this.filterDishes(this.currentFilter);
                 this.renderDishesGrid();
             }
 
@@ -1091,7 +1181,6 @@
 
             deletePersonCategory(personName) {
                 if (this.people.length <= 1) {
-                    alert("Debe existir al menos una categoría de persona.");
                     return;
                 }
                 this.people = this.people.filter(p => p !== personName);
@@ -1211,6 +1300,10 @@
                 // Botón principal de Giro Aleatorio con Aterrizaje
                 document.getElementById('btn-spin-main').addEventListener('click', () => this.spinToRandom());
 
+                // Botón para Reiniciar la ruleta (desde pantalla de ruleta vacía y desde botón manual)
+                document.getElementById('btn-reset-wheel-empty').addEventListener('click', () => this.resetRoulette());
+                document.getElementById('btn-manual-reset-wheel').addEventListener('click', () => this.resetRoulette());
+
                 // Botón de alternar el Giro Suave Ambiental
                 document.getElementById('btn-ambient').addEventListener('click', () => {
                     this.isAmbient = !this.isAmbient;
@@ -1314,8 +1407,7 @@
                         this.dishes.unshift(newDish);
                     }
 
-                    const activeFilter = document.querySelector('.filter-chip.active')?.getAttribute('data-family') || 'ALL';
-                    this.filterDishes(activeFilter);
+                    this.filterDishes(this.currentFilter);
                     this.renderDishesGrid();
 
                     closeAddModal();
@@ -1365,7 +1457,7 @@
                 const delta = Math.min(32, now - this.lastFrameTime);
                 this.lastFrameTime = now;
 
-                if (!this.isSpinning && !this.isDragging) {
+                if (!this.isSpinning && !this.isDragging && this.activeDishes.length > 0) {
                     if (Math.abs(this.velocity) > 0.05) {
                         // Inercia de arrastre en desaceleración
                         this.currentAngle += this.velocity;
