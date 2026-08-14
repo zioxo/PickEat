@@ -56,7 +56,6 @@ De esta manera se crea un sistema personalizado que se adapta a las preferencias
 
 <p align="center">
   <img src="https://i.postimg.cc/C5pDqvNn/capturas.png" alt="PickEat" width="1300">
-  <img src="https://i.postimg.cc/0NNTwv5V/appv1.gif" alt="PickEat" width="1300">
 </p>
 
 ---
