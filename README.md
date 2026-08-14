@@ -15,7 +15,7 @@
     <img src="https://i.postimg.cc/7fvG0y57/Pick-Eat-logo.png" alt="PickEat" width="200">
   </a>
 </p>
-Click en el ícono y testera app
+Clic en el ícono y testera app
 https://zioxo.github.io/PickEat
 </div>
 
