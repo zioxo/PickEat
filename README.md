@@ -1,5 +1,6 @@
 <div align="center">
-
+    <img src="https://i.postimg.cc/4d3PN45j/cover.jpg" alt="PickEat" width="1500">
+  
 # 🍽️ PickEat
 
 ### Decidir qué cocinar ya no tiene que ser un problema.
@@ -54,7 +55,8 @@ La aplicación incorpora:
 De esta manera se crea un sistema personalizado que se adapta a las preferencias del hogar y ayuda a organizar mejor las decisiones del día a día.
 
 <p align="center">
-  <img src="https://i.postimg.cc/C5pDqvNn/capturas.png" alt="PickEat" width="1000">
+  <img src="https://i.postimg.cc/C5pDqvNn/capturas.png" alt="PickEat" width="1300">
+  <img src="https://i.postimg.cc/0NNTwv5V/appv1.gif" alt="PickEat" width="1300">
 </p>
 
 ---
@@ -159,10 +161,8 @@ PickEat permite registrar y organizar diferentes platos dentro de una biblioteca
 Cada plato puede incluir información como:
 
 - Nombre del plato.
-- Imagen.
 - Ingredientes.
 - Personas que prefieren ese plato.
-- Información adicional de la comida.
 
 Esto convierte PickEat no solamente en una herramienta de selección, sino también en una pequeña base de datos culinaria familiar.
 
